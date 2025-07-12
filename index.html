@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>centuryPKG 短網址跳轉器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="font-family: sans-serif; text-align: center; padding: 50px;">
+  <h2>正在跳轉中...</h2>
+  <p>請稍候，我們將導向優惠方案頁面</p>
+
+  <script>
+    (async () => {
+      const code = "centuryPKG";
+      const info = await fetch("https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN").then(r => r.json());
+
+      const params = new URLSearchParams({
+        s: code,
+        ip: info.ip,
+        city: info.city,
+        region: info.region,
+        country: info.country,
+        ua: navigator.userAgent
+      });
+
+      // 替換為你的 Google Apps Script 短網址部署網址
+      await fetch("https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?" + params.toString());
+
+      // 轉址至原始網址
+      window.location.href = "https://tlathena.ec-hotel.net/webhotel-v4/0299/rmProducts/PKG977/special";
+    })();
+  </script>
+</body>
+</html>
