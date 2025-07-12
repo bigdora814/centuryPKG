@@ -1,4 +1,5 @@
-
+# 使用者提供了 IPinfo 的 API Token，產出新的 index.html 檔案（使用 ipinfo）
+updated_html = """
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -13,7 +14,8 @@
   <script>
     (async () => {
       const code = "centuryPKG";
-      const info = await fetch("https://ipinfo.io/json?token=YOUR_IPINFO_TOKEN").then(r => r.json());
+
+      const info = await fetch("https://ipinfo.io/json?token=591c0cc4-d25b-45ca-9dcf-88cc6b0f098e").then(r => r.json());
 
       const params = new URLSearchParams({
         s: code,
@@ -24,12 +26,18 @@
         ua: navigator.userAgent
       });
 
-      // 替換為你的 Google Apps Script 短網址部署網址
-      await fetch("https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec?" + params.toString());
+      await fetch("https://script.google.com/macros/s/AKfycby1HKNE0Zaz9OOy4HrfVLEEav6Pu7FSOBpWjtrQVkRRaE6wJe4m1oOrkmOkVHapkFgOUQ/exec?" + params.toString());
 
-      // 轉址至原始網址
       window.location.href = "https://tlathena.ec-hotel.net/webhotel-v4/0299/rmProducts/PKG977/special";
     })();
   </script>
 </body>
 </html>
+"""
+
+# 輸出更新後的 HTML 至 ZIP
+zip_path = "/mnt/data/centuryPKG_final_ipinfo_token.zip"
+with zipfile.ZipFile(zip_path, "w") as zipf:
+    zipf.writestr("index.html", updated_html)
+
+zip_path
